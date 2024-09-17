@@ -10,8 +10,8 @@ COPY FilmFinderApi/FilmFinderApi.csproj ./  # Correct path for csproj
 # Restore dependencies
 RUN dotnet restore
 
-# Copy the rest of the application code into the container
-COPY FilmFinderApi/. ./  # Correct path for the application files
+# # Copy the rest of the application code into the container
+# COPY FilmFinderApi/. ./  # Correct path for the application files
 
 # Build and publish the application
 RUN dotnet publish -c Release -o out
