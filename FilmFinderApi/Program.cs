@@ -4,7 +4,7 @@ using FilmFinderApi.Services;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.UseUrls("http://*:8089");
+builder.WebHost.UseUrls("http://*:8080");
 
 var config = builder.Configuration;
 
