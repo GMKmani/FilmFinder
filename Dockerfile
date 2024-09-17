@@ -5,7 +5,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
 # Copy the project file(s) into the container
-COPY FilmFinderApi/FilmFinderApi.csproj ./  # Correct path for csproj
+COPY FilmFinderApi/FilmFinderApi.csproj/  # Correct path for csproj
 
 # Restore dependencies
 RUN dotnet restore
