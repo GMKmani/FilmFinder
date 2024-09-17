@@ -5,13 +5,13 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
 # Copy the project file(s) into the container
-COPY FilmFinderApi/FilmFinderApi.csproj ./  # <-- Adjust the path
+COPY FilmFinderApi/FilmFinderApi.csproj ./  # Correct path for csproj
 
 # Restore dependencies
 RUN dotnet restore
 
 # Copy the rest of the application code into the container
-COPY FilmFinderApi/. ./  # <-- Adjust the path
+COPY FilmFinderApi/. ./  # Correct path for the application files
 
 # Build and publish the application
 RUN dotnet publish -c Release -o out
