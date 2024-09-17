@@ -72,7 +72,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
 app.UseCors("AllowSpecificOrigin");
 
 app.UseSession(); // Enable session middleware
