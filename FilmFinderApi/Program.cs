@@ -4,7 +4,7 @@ using FilmFinderApi.Services;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.UseUrls("http://*:8080");
+
 
 var config = builder.Configuration;
 
@@ -79,7 +79,7 @@ app.UseSession(); // Enable session middleware
 app.UseAuthentication();
 
 app.UseAuthorization();
-
+app.MapGet("/", () => "Healthy");
 app.MapControllers();
 
 app.Run();
