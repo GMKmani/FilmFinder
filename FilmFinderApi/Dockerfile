@@ -1,23 +1,29 @@
-# Use the official ASP.NET Core runtime as the base image
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+# Use the official .NET 8 SDK image for the build stage
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+
+# Set the working directory in the container
 WORKDIR /app
-EXPOSE 80
 
-# Use the .NET SDK as the build image
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-WORKDIR /src
-COPY ["FilmFinderApi.csproj", "./"]
-RUN dotnet restore "./FilmFinderApi/FilmFinderApi.csproj"
-COPY . .
-WORKDIR "/src"
-RUN dotnet build "FilmFinderApi/FilmFinderApi.csproj" -c Release -o /app/build
+# Copy the project file(s) into the container
+COPY FilmFinderApi.csproj ./
 
-# Publish the application
-FROM build AS publish
-RUN dotnet publish "FilmFinderApi/FilmFinderApi.csproj" -c Release -o /app/publish
+# Restore dependencies
+RUN dotnet restore
 
-# Final stage: create the runtime image
-FROM base AS final
+# Copy the rest of the application code into the container
+COPY . ./
+
+# Build and publish the application
+RUN dotnet publish -c Release -o out
+
+# Use the official .NET runtime image for the runtime stage
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+
+# Set the working directory in the container
 WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "FilmFinderApi/FilmFinderApi.dll"]
+
+# Copy the published application from the build stage
+COPY --from=build /app/out .
+
+# Specify the entry point of the application
+ENTRYPOINT ["dotnet", "FilmFinderApi.dll"]
