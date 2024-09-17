@@ -13,10 +13,13 @@ COPY . .
 # Publish the application
 RUN dotnet publish FilmFinderApi/FilmFinderApi.csproj -c Release -o out
 
-ENV ASPNETCORE_ENVIRONMENT=Production
-ENV ASPNETCORE_URLS=http://+:8080;https://+:8443
+
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+WORKDIR /app
+
+ENV ASPNETCORE_ENVIRONMENT=Production
+ENV ASPNETCORE_URLS=http://+:8080;https://+:8443
 
 COPY --from=build /app/out .
 
