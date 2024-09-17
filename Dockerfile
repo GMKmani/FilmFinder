@@ -5,7 +5,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
 
-COPY ./FilmFinderApi.csproj  
+COPY FilmFinderApi/FilmFinderApi.csproj  
 
 
 RUN dotnet restore
