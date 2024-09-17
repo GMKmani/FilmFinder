@@ -19,7 +19,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 
 ENV ASPNETCORE_ENVIRONMENT=Production
-ENV ASPNETCORE_URLS=http://+:8080;https://+:8443
+ENV ASPNETCORE_URLS=http://+:8089;https://+:8443
 
 COPY --from=build /app/out .
 
